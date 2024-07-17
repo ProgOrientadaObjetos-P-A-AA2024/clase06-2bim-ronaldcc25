@@ -47,6 +47,9 @@ public class Enlace {
         try{  
             establecerConexion();
             Statement statement = obtenerConexion().createStatement();
+            /*
+            Ciudad es el nombre de la tabla que esta creada en la base de datos
+            */            
             String data = String.format("INSERT INTO Ciudad (nombre, poblacion) "
                     + "values ('%s', %d)", ciudad.obtenerNombre(), 
                     ciudad.obtenerPoblacion());
@@ -68,6 +71,13 @@ public class Enlace {
             
             ResultSet rs = statement.executeQuery(data);
             while(rs.next()){
+                /*
+                Primeramenete usamso el .next dentro de la comparativa booleana,
+                porque el archivo va a rescatar los valores que tenga la base
+                de datos.
+                Usamos el getString para rescatar el String que tengamos en la
+                base de datos, y el getInt para rescatar datos de tipo entero
+                */
                 Ciudad miCiudad = new Ciudad(rs.getString("nombre"),
                 rs.getInt("poblacion"));
                 lista.add(miCiudad);
